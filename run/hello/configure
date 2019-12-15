@@ -1,0 +1,27 @@
+# export FLASK_ENV=development 
+export FLASK_APP=hello
+meta_s
+
+# Commands:
+#   routes  Show the routes for the app.
+#   run     Run a development server.
+#   shell   Run a shell in the app context.
+# r --host=0.0.0.0 --port=8888
+r() {
+    # or use python argparse, or click?
+    # echo "${@:2}"
+    if [ $# -eq 0 ]; then flask run; return $?; fi
+    case "$1" in run|routes|shell)
+        flask "$@"
+        # echo match
+        ;; all)
+        flask run --host=0.0.0.0 "${@:2}"
+        ;; *)
+        flask run "$@"
+        # echo default
+    esac
+}
+
+return $?
+
+https://flask.palletsprojects.com/en/1.1.x/quickstart/
